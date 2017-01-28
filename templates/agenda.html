@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+
+    <div class="container">
+        <div class="row">
+            <form action="{{ post }}" method="post">
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label>Date:</label>
+                        <input type="date" name="date" class="form-control"
+                               value="{% if agenda %}{{ agenda.date }}{% else %}{{ today }}{% endif %}"/>
+                    </div>
+                </div>
+                <br>
+                <p><label>Horário de Trabalho</label></p>
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label>Entrada: </label>
+                        <input type="text" name="workStart" class="form-control time" placeholder="00:00"
+                               value="{% if agenda %}{{ agenda.work_start.strftime('%H:%M') }}{% else %}{{ now.strftime('%H:%M') }}{% endif %}"/>
+
+                        <label style="padding-left: 10px;">Saída: </label>
+                        <input type="text" name="workEnd" class="form-control time" placeholder="00:00"
+                                value="{% if agenda %}{{ agenda.work_end.strftime('%H:%M') }}{% else %}{{ now.strftime('%H:%M') }}{% endif %}"/>
+                    </div>
+                </div>
+
+                <br>
+                <p><label>Horário de Almoço</label></p>
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label>Entrada: </label>
+                        <input type="text" name="restStart" class="form-control time" placeholder="00:00"
+                                value="{% if agenda %}{{ agenda.rest_start.strftime('%H:%M') }}{% else %}{{ now.strftime('%H:%M') }}{% endif %}"/>
+
+                        <label style="padding-left: 10px;">Saída: </label>
+                        <input type="text" name="restEnd" class="form-control time" placeholder="00:00"
+                                value="{% if agenda %}{{ agenda.rest_end.strftime('%H:%M') }}{% else %}{{ now.strftime('%H:%M') }}{% endif %}"/>
+                    </div>
+                </div>
+
+                <input type="text" name="user_id" class="hidden" value="{{ user_id }}">
+
+                <p><button type="submit" class="btn btn-success"><i class="fa fa-check"></i>Salvar</button></p>
+            </form>
+        </div>
+
+        <div class="spacing"></div>
+
+        <div class="row centered">
+            <h2>Agenda</h2>
+        </div>
+
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Work Start</th>
+                        <th>Work End</th>
+                        <th>Lunch Start</th>
+                        <th>Lunch End</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if agendas %}
+                        {% for agenda in agendas %}
+                            <tr>
+                                <td>{{ agenda.date.strftime("%d/%m/%Y") }}</td>
+                                <td>{{ agenda.work_start.strftime("%H:%M") }}</td>
+                                <td>{{ agenda.work_end.strftime("%H:%M") }}</td>
+                                <td>{{ agenda.rest_start.strftime("%H:%M") }}</td>
+                                <td>{{ agenda.rest_end.strftime("%H:%M") }}</td>
+                                <td><a href="/user/agenda/edit/{{ agenda.id }}/{{ user_id }}" class="btn btn-warning" title="Editar"><i class="fa fa-pencil"></i></a></td>
+                                <td><a href="/user/agenda/delete/{{ agenda.id }}/{{ user_id }}" class="btn btn-danger" title="Remover"><i class="fa fa-trash"></i></a></td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" src="/static/js/jquery.mask.min.js"></script>
+    <script>
+        $(document).ready(function(){
+           $('.time').mask('00:00');
+        });
+    </script>
+{% endblock %}

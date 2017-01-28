@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+
+    <div class="container">
+        <div class="row">
+            <form action="{{ post }}" method="post">
+                <div class="form-inline">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="name" placeholder="Nome..." value="{% if user %}{{ user.name }}{% endif %}"/>
+                        <input type="text" class="form-control" name="email" placeholder="Email..." value="{% if user %}{{ user.email }}{% endif %}"/>
+                        <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> {% if user %}Atualizar{% else %}Salvar{% endif %}</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="spacing"></div>
+
+        <div class="row centered">
+            <h2>Funcionários</h2>
+        </div>
+
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td>{{ user.name }}</td>
+                            <td>{{ user.email }}</td>
+                            <td><a href="/user/agenda/{{ user.id }}" class="btn btn-primary" title="Ponto"><i class="fa fa-clock-o"></i></a></td>
+                            <td><a href="/user/edit/{{ user.id }}" class="btn btn-warning" title="Editar"><i class="fa fa-pencil"></i></a></td>
+                            <td><a href="/user/delete/{{ user.id }}" class="btn btn-danger" title="Remover"><i class="fa fa-trash"></i></a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
