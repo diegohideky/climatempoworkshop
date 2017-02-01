@@ -7,7 +7,7 @@ def getAgenda(id):
 
 
 def getAgendas(id):
-    return db.session.query(Agenda).filter(Agenda.user_id==id).all()
+    return db.session.query(Agenda).filter(Agenda.user_id==id).order_by(Agenda.date.desc(), Agenda.work_start).all()
 
 
 def update(agenda):

@@ -49,7 +49,7 @@
         </div>
         <div class="navbar-collapse collapse navbar-right">
             <ul class="nav navbar-nav">
-                <li><a href="/login">LOGIN</a></li>
+                {% block nav %}{% endblock %}
             </ul>
         </div>
         <!--/.nav-collapse -->
@@ -71,10 +71,60 @@
 
 {% block main %}{% endblock %}
 
+<div class="spacing"></div>
+
+<!-- *****************************************************************************************************************
+ FOOTER
+ ***************************************************************************************************************** -->
+<div id="footerwrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <h4>Sobre</h4>
+
+                <div class="hline-w"></div>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s.</p>
+            </div>
+            <div class="col-lg-4">
+                <h4>Redes Sociais</h4>
+
+                <div class="hline-w"></div>
+                <p>
+                    <!--<a href="#"><i class="fa fa-dribbble"></i></a>-->
+                    <a href="https://www.facebook.com/Centro-Educacional-Moinho-de-Vento-433759780168521/"
+                       target="_blank"><i class="fa fa-facebook-official fa-4x"></i></a>
+
+                    Algum texto texto aqui Algum texto texto aqui Algum texto texto aqui
+                    Algum texto texto aqui Algum texto texto aqui Algum texto texto aqui.
+                    <!--<a href="#"><i class="fa fa-twitter"></i></a>-->
+                    <!--<a href="#"><i class="fa fa-instagram"></i></a>/-->
+                    <!--<a href="#"><i class="fa fa-tumblr"></i></a>-->
+                </p>
+            </div>
+            <div class="col-lg-4">
+                <h4>Nosso Endereço</h4>
+
+                <div class="hline-w"></div>
+                <p>
+                    Rua Ipanema, 623,<br/>
+                    Jardim Satélite, São José dos Campos,<br/>
+                    SP, Brasil.<br/>
+                </p>
+            </div>
+
+        </div>
+        <! --/row -->
+    </div>
+    <! --/container -->
+</div>
+<! --/footerwrap -->
+
+
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="/static/js/jquery-3.1.1.min.js"></script>
 <script src="/static/js/bootstrap.min.js"></script>
 <script src="/static/js/retina-1.1.0.js"></script>
 <script src="/static/js/jquery.hoverdir.js"></script>
