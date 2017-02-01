@@ -7,6 +7,7 @@ from flask.templating import render_template
 from werkzeug.utils import redirect
 from resources.controller import userController
 from resources.dao import userDao
+from resources.helper import encrypt
 from resources.model.user import User
 
 
@@ -35,7 +36,8 @@ def signin(request):
             erro = 'Senhas diferentes'
         else:
             photo = request.files['photo']
-            userDao.update(User(request.form['username'], request.form['email'], request.form['password'],
+            userDao.update(User(request.form['username'], request.form['email'],
+                                encrypt.encode(request.form['password']),
                                 request.form['name'], b64encode(photo.read())))
             user = userDao.lastUser()
             session['loggedin'] = True
